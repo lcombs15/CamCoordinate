@@ -14,7 +14,7 @@ public class Main extends Application{
 	
 	public static void main(String[] args) {
 		System.out.println("File list:");
-		File f = new File("C:\\Users\\Lucas\\Dropbox\\Camera Uploads\\");
+		File f = new File("/home/lucas/");
 		
 		for(File file: f.listFiles()) {
 			System.out.println(file.toString());
@@ -61,6 +61,8 @@ public class Main extends Application{
 		stage.setTitle(APPLICATION_TITLE);
 		stage.setScene(scene);
 		stage.show();
+		
+		System.out.println(System.getProperty("os.name").toString());
 	}
 
 }
