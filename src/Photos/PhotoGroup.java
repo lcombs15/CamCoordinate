@@ -1,14 +1,26 @@
+/**
+ * PhotoGroup.java
+ * 
+ * The purpose of this class hasn't been 100% established, yet.
+ * I want this class to be a helpful wrapper around a list of Photos.
+ * 
+ * Currently this class can parse a directory and create groups of photos
+ * based on when they were taken.
+ * 
+ * Functionality could later include:
+ * 	-Handling SQL
+ * 	-Book keeping for destination directories
+ */
 package Photos;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.Collections;
 
 public class PhotoGroup {
 
 	public static final String[] SUPPORTED_FILE_EXTENSIONS = { "PNG", "JPEG", "GIF" };
+	private ArrayList<Photo> photos = new ArrayList<Photo>();
 
 	String destination;
 
@@ -16,42 +28,64 @@ public class PhotoGroup {
 		this.destination = destination_path;
 	}
 
-	public static ArrayList<PhotoGroup> searchDirectory(String path, boolean subdirectory) {
-
-		// Test directory
-		File dir = new File("C:\\Users\\Lucas\\Dropbox\\Camera Uploads\\");
-
-		// List files in directory & sort them by date last modified
-		File files[] = dir.listFiles();
-		Arrays.sort(files, (a, b) -> {
-			return (new Date(a.lastModified())).compareTo(new Date(b.lastModified()));
-		});
-
-		Date prev = null;
-		int numInGroup = 1;
-		// Print everything out
-		for (int i = 0; i < files.length; i++) {
-			Date current = new Date(files[i].lastModified());
-
-			long diffInMilli = -1, diffInMin = -1;
-			if (prev != null) {
-				diffInMilli = current.getTime() - prev.getTime();
-				diffInMin = (diffInMilli / 1000) / 60;
-				if (diffInMin > 15) {
-					System.out.println();
-					numInGroup = 1;
-				} else {
-					numInGroup++;
-				}
-			}
-
-			System.out.println(numInGroup + ".) " + current + " " + diffInMin + "\t" + files[i]);
-			prev = current;
-		}
-		return new ArrayList<PhotoGroup>();
+	public PhotoGroup() {
 	}
 
-	private ArrayList<Photo> allPhotosInDirectory(String dir_path, boolean recursiveSearch) {
+	public void addPhoto(Photo p) {
+		this.photos.add(p);
+	}
+	
+	public ArrayList<Photo> getPhotos(){
+		return this.photos;
+	}
+
+	/*
+	 * Break up all photos in a given directory into group based on date last
+	 * modified
+	 */
+	public static ArrayList<PhotoGroup> searchDirectory(String path, boolean recursiveSearch) {
+		// Get sorted list of photos in directory
+		ArrayList<Photo> photos = allPhotosInDirectory(path, recursiveSearch);
+
+		// Do not continue if no photos found
+		if (photos.size() == 0)
+			return null;
+
+		// Create retVal now that we've found photos
+		ArrayList<PhotoGroup> retVal = new ArrayList<PhotoGroup>();
+
+		// Prepare first group by adding first photo
+		PhotoGroup current_group = new PhotoGroup();
+		current_group.addPhoto(photos.get(0));
+
+		// References to current and previous for loop convenience
+		Photo current;
+		Photo previous = photos.get(0);
+
+		for (int i = 1; i < photos.size(); i++) {
+			current = photos.get(i);
+
+			// Was the current picture take more than 15 minutes after the previous?
+			if ((current.getFile().lastModified() - previous.getFile().lastModified()) / 60_000 > 15) {
+				// Group is complete, add to return list
+				retVal.add(current_group);
+
+				// Create new group
+				current_group = new PhotoGroup();
+			}
+			// Add current photo to current group
+			current_group.addPhoto(current);
+
+			// Current becomes previous
+			previous = current;
+		}
+		return retVal;
+	}
+
+	/*
+	 * Returns all photos in given directory sorted by date last modified.
+	 */
+	private static ArrayList<Photo> allPhotosInDirectory(String dir_path, boolean recursiveSearch) {
 		ArrayList<Photo> retVal = new ArrayList<Photo>();
 
 		File dir = new File(dir_path);
@@ -80,6 +114,10 @@ public class PhotoGroup {
 				}
 			}
 		}
+
+		// Sort photos bases on the Photo.compareTo(Photo p) method
+		Collections.sort(retVal);
+
 		return retVal;
 	}
 

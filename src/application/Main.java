@@ -1,5 +1,9 @@
 package application;
 
+import java.util.ArrayList;
+
+import Photos.Photo;
+import Photos.PhotoGroup;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -21,6 +25,17 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		//launch(args);
+		
+		ArrayList<PhotoGroup> groups = PhotoGroup.searchDirectory("/home/lucas/Dropbox/Camera Uploads/", true);
+		
+		for(PhotoGroup pg: groups) {
+			System.out.println("Group: ");
+			ArrayList<Photo> photos = pg.getPhotos();
+			for(Photo p: photos) {
+				System.out.println("\t" + p);
+			}
+		}
+		
 		System.exit(0);
 	}
 	
