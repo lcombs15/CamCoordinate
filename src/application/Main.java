@@ -1,9 +1,5 @@
 package application;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Date;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -25,14 +21,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		//launch(args);
-		File f = new File("/home/lucas/Desktop/file.txt");
-		System.out.println(f.isDirectory());
-		System.out.println(f.getPath());
-
-		
-		f = f.getParentFile();
-		System.out.println(f.isDirectory());
-		System.out.println(f.getPath());
+		System.exit(0);
 	}
 	
 }
