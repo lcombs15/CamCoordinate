@@ -19,7 +19,7 @@ import java.util.Collections;
 
 public class PhotoGroup {
 
-	public static final String[] SUPPORTED_FILE_EXTENSIONS = { "PNG", "JPEG", "GIF" };
+	public static final String[] SUPPORTED_FILE_EXTENSIONS = { "PNG", "JPEG", "GIF", "JPG" };
 	private ArrayList<Photo> photos = new ArrayList<Photo>();
 
 	String destination;
@@ -34,8 +34,8 @@ public class PhotoGroup {
 	public void addPhoto(Photo p) {
 		this.photos.add(p);
 	}
-	
-	public ArrayList<Photo> getPhotos(){
+
+	public ArrayList<Photo> getPhotos() {
 		return this.photos;
 	}
 
@@ -119,6 +119,30 @@ public class PhotoGroup {
 		Collections.sort(retVal);
 
 		return retVal;
+	}
+
+	public void move(File dir) {
+		// Make sure we have a directory, not a file
+		if (dir.isFile()) {
+			move(dir.getParentFile());
+			return;
+		}
+
+		// Make directory if it doesn't exist
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+
+		// Loop through all photos
+		for (int i = 0; i < this.photos.size(); i++) {
+			// Create destination file based on name and destination directory
+			File dest_file = new File(dir, photos.get(i).getFile().getName());
+
+			// If successfully moved file, record change in photo array
+			if (photos.get(i).getFile().renameTo(dest_file)) {
+				photos.set(i, new Photo(dest_file));
+			}
+		}
 	}
 
 }
