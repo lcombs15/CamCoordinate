@@ -1,9 +1,10 @@
 package application;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.ArrayList;
 
+import Photos.Photo;
+import Photos.PhotoGroup;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -26,36 +27,28 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		// launch(args);
 
-		// Test directory
-		File dir = new File("C:\\Users\\Lucas\\Dropbox\\Camera Uploads\\");
-
-		// List files in directory & sort them by date last modified
-		File files[] = dir.listFiles();
-		Arrays.sort(files, (a, b) -> {
-			return (new Date(a.lastModified())).compareTo(new Date(b.lastModified()));
-		});
-
-		Date prev = null;
-		int numInGroup = 1;
-		// Print everything out
-		for (int i = 0; i < files.length; i++) {
-			Date current = new Date(files[i].lastModified());
-
-			long diffInMilli = -1, diffInMin = -1;
-			if (prev != null) {
-				diffInMilli = current.getTime() - prev.getTime();
-				diffInMin = (diffInMilli / 1000) / 60;
-				if (diffInMin > 15) {
-					System.out.println();
-					numInGroup = 1;
-				} else {
-					numInGroup++;
 				}
 			}
 
-			System.out.println(numInGroup + ".) " + current + " " + diffInMin + "\t" + files[i]);
-			prev = current;
+		ArrayList<PhotoGroup> groups = PhotoGroup.searchDirectory("/home/lucas/Desktop/photos test/", true);
+
+		for (PhotoGroup pg : groups) {
+			ArrayList<Photo> photos = pg.getPhotos();
+
+			if (photos.size() > 100) {
+				System.out.println("Group: " + photos.size());
+				for (Photo p : photos) {
+					System.out.println("\t" + p);
+				}
+				pg.move(new File("/home/lucas/Desktop/dest"));
+				photos = pg.getPhotos();
+				for (Photo p : photos) {
+					System.out.println("\t\t" + p);
+				}
+			}
 		}
+
+		System.exit(0);
 	}
 
 }
