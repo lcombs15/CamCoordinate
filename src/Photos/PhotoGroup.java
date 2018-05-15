@@ -121,10 +121,10 @@ public class PhotoGroup {
 		return retVal;
 	}
 
-	public void move(File dir) {
+	public void moveToDir(File dir) {
 		// Make sure we have a directory, not a file
 		if (dir.isFile()) {
-			move(dir.getParentFile());
+			moveToDir(dir.getParentFile());
 			return;
 		}
 
