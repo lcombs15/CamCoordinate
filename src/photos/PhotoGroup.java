@@ -11,7 +11,7 @@
  * 	-Handling SQL
  * 	-Book keeping for destination directories
  */
-package Photos;
+package photos;
 
 import java.io.File;
 import java.util.ArrayList;

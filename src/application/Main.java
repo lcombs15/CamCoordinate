@@ -3,11 +3,11 @@ package application;
 import java.io.File;
 import java.util.ArrayList;
 
-import Photos.Photo;
-import Photos.PhotoGroup;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import photos.Photo;
+import photos.PhotoGroup;
 import javafx.scene.Scene;
 
 public class Main extends Application {
