@@ -1,5 +1,5 @@
 /**
- * PhotoGroup.java
+ * PhotoGroup.java0
  * 
  * The purpose of this class hasn't been 100% established, yet.
  * I want this class to be a helpful wrapper around a list of Photos.
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PhotoGroup {
-
 	public static final String[] SUPPORTED_FILE_EXTENSIONS = { "PNG", "JPEG", "GIF", "JPG" };
 	private ArrayList<Photo> photos = new ArrayList<Photo>();
 
