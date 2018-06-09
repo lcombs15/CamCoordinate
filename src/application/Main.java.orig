@@ -27,7 +27,37 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		// launch(args);
 
-		/* Find photos testing
+<<<<<<< HEAD
+		// Test directory
+		File dir = new File("C:\\Users\\Lucas\\Dropbox\\Camera Uploads\\");
+
+		// List files in directory & sort them by date last modified
+		File files[] = dir.listFiles();
+		Arrays.sort(files, (a, b) -> {
+			return (new Date(a.lastModified())).compareTo(new Date(b.lastModified()));
+		});
+
+		Date prev = null;
+		int numInGroup = 1;
+		// Print everything out
+		for (int i = 0; i < files.length; i++) {
+			Date current = new Date(files[i].lastModified());
+
+			long diffInMilli = -1, diffInMin = -1;
+			if (prev != null) {
+				diffInMilli = current.getTime() - prev.getTime();
+				diffInMin = (diffInMilli / 1000) / 60;
+				if (diffInMin > 15) {
+					System.out.println();
+					numInGroup = 1;
+				} else {
+					numInGroup++;
+				}
+			}
+
+			System.out.println(numInGroup + ".) " + current + " " + diffInMin + "\t" + files[i]);
+			prev = current;
+=======
 		ArrayList<PhotoGroup> groups = PhotoGroup.searchDirectory("/home/lucas/Desktop/photos test/", true);
 
 		for (PhotoGroup pg : groups) {
@@ -38,15 +68,15 @@ public class Main extends Application {
 				for (Photo p : photos) {
 					System.out.println("\t" + p);
 				}
-				pg.moveToDir(new File("/home/lucas/Desktop/dest"));
+				pg.move(new File("/home/lucas/Desktop/dest"));
 				photos = pg.getPhotos();
 				for (Photo p : photos) {
 					System.out.println("\t\t" + p);
 				}
 			}
+>>>>>>> 56e224676f9cab58beb7048b34bb00716e40ff05
 		}
 
-	*/
 		System.exit(0);
 	}
 
