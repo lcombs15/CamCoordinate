@@ -31,7 +31,7 @@
       <TextArea fx:id="messageArea" editable="false" prefHeight="80.0" prefWidth="600.0" text="Welcome!" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridArea" alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
