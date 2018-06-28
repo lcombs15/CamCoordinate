@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xml.MainMenuController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xml.MainMenuController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -31,7 +31,7 @@
       <TextArea fx:id="messageArea" editable="false" prefHeight="80.0" prefWidth="600.0" text="Welcome!" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <GridPane fx:id="gridArea" alignment="CENTER" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridArea" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>

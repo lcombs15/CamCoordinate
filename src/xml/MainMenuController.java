@@ -4,14 +4,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout.Alignment;
+
 import com.sun.glass.ui.MenuItem;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import photos.Photo;
@@ -50,7 +57,16 @@ public class MainMenuController {
 
 		try {
 			Node n = fxmlLoader.load();			
-			gridArea.add(n,1,1);
+			gridArea.add(n,0,0);
+			
+			// Allow node to re-size automatically
+			GridPane.setHgrow(n, Priority.ALWAYS);
+			GridPane.setVgrow(n, Priority.ALWAYS);
+			
+			// Align center
+			GridPane.setHalignment(n, HPos.LEFT);
+			GridPane.setValignment(n, VPos.TOP);
+
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
