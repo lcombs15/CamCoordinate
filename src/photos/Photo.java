@@ -3,7 +3,7 @@
  * The Photo class is meant to give a wrapper for a Photo's respective File object.
  * The biggest benefit of this class is the compareTo method for Comparable
  */
-package Photos;
+package photos;
 
 import java.io.File;
 import java.util.Date;
