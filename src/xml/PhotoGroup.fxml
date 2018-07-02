@@ -12,7 +12,7 @@
       <ImageView fx:id="previewThumbnail" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ButtonBar fx:id="groupMenu" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
           <Button alignment="CENTER" mnemonicParsing="false" text="Button" textAlignment="CENTER" />
             <Button mnemonicParsing="false" text="Button" />
@@ -22,7 +22,7 @@
       </ButtonBar>
    </bottom>
    <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Group Name Here" BorderPane.alignment="CENTER">
+      <Text fx:id="groupTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Group Name Here" BorderPane.alignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>
